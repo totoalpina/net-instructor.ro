@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <h1 class="mt-4 mb-3">Adaugare cursant nou
+      <small></small>
+    </h1>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+            <a href="{{ url_for('index')}}">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Adauga cursant</li>
+    </ol>
+    <hr>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissable d-flex justify-content-around" role="alert" style="text-align: center">
+                                        <div class="justify-content-around" style=" text-align: center">
+                                            {{message}}
+                                        </div>
+                                        <div class="justify-content-around" style="text-align: center">
+                                             <button type="button" class="close float-right" data-dismiss="alert" aria-label ="close" style="text-align: center">
+                                                 <span aria-hidden="true" class="float-right" style="text-align: center">&times;</span>
+                                             </button>
+                                        </div>
+
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+
+        <form method="POST" action="{{ url_for('cursant') }}">
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                          <div class="card-body">
+                                {{ form.hidden_tag() }}
+                                  <label>Nume</label><br>
+                                  {{ form.nume }}<br>
+                                  <label>Prenume</label><br>
+                                  {{ form.prenume }}<br>
+                                  <label>Localitate</label><br>
+                                  {{ form.localitate }}<br>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                          <div class="card-body">
+                                  <label>Adresa</label><br>
+                                  {{ form.adresa }}<br>
+                                  <label>Email</label><br>
+                                  {{ form.email }}<br>
+                                  <label>Telefon</label><br>
+                                  {{ form.telefon }}<br>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                                  <label>Categorie Scolarizare</label><br>
+                                  {{ form.categorie_scolarizare }}<br>
+                                  <label>Observatii</label><br>
+                                  {{ form.observatii }}<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id="success">
+                <button type="submit" class="btn btn-primary">Inregistrati</button>
+            </div>
+        </form>
+
+    <!-- /.row -->
+    <hr style="background-color: #f59321">
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Modern Business Features</h2>
+        <p>The Modern Business template by Start Bootstrap includes:</p>
+        <ul>
+          <li>
+            <strong>Bootstrap v4</strong>
+          </li>
+          <li>jQuery</li>
+          <li>Font Awesome</li>
+          <li>Working contact form with validation</li>
+          <li>Unstyled page elements for easy customization</li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded" src="{{url_for('static', filename='img/poligon_moto.jpg')}}" alt="">
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Call to Action Section -->
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+      </div>
+      <div class="col-md-4">
+        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
