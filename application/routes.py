@@ -42,7 +42,6 @@ def logare():
 def cont_nou():
     form = SignupForm()
     an_curent = datetime.now()
-
     if form.validate_on_submit():
         hased_parola = generate_password_hash(form.parola.data, method='sha256' )
         utilizator_nou = Login(nume=form.nume.data, prenume=form.prenume.data, utilizator=form.utilizator.data, email=form.email.data,
@@ -64,7 +63,7 @@ def cont_nou():
             return redirect(url_for('index'))
         else:
             flash("Parola nu este identica, incercati din nou !")
-            return redirect(url_for('cont_nou'))
+        return redirect(url_for('cont_nou'))
     return render_template('cont_nou.html', form=form, an_curent=an_curent)
 
 @app.route('/confirmare_email/<token>')

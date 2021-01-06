@@ -36,7 +36,7 @@ class CursantNouForm(FlaskForm):
     localitate = StringField('localitate', validators=[Length(max=50)])
     adresa = StringField('adresa', validators=[Length(max=250)])
     categorie_scolarizare = SelectField('categorie_scolarizare', choices=[('A','A'), ('B','B')])
-    email = StringField('localitate', validators=[Length(max=50)])
+    email = StringField('email', validators=[Email(), Length(max=50)])
     telefon = StringField('telefon', validators=[Length(max=13)])
     data_adaugare = DateTimeField('data_adaugare')
     data_modificare = DateTimeField('data_modificare')

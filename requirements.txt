@@ -19,6 +19,7 @@ Flask-SocketIO==5.0.1
 Flask-SQLAlchemy==2.4.4
 Flask-WTF==0.14.3
 idna==3.0
+is-disposable-email==1.0.0
 isort==5.7.0
 itsdangerous==1.1.0
 Jinja2==2.11.2
