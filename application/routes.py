@@ -5,10 +5,10 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
-from flask_mail import Message, Mail
+from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 
-s = URLSafeTimedSerializer(app.secret_key)
+s = URLSafeTimedSerializer('SECRET_KEY')
 
 @login_manager.user_loader
 def load_user(login_id):
@@ -26,16 +26,26 @@ def logare():
     an_curent = datetime.now()
     if form.validate_on_submit() :
         utilizator = Login.query.filter_by(utilizator=form.utilizator.data).first()
-        print('Verific utilizator logat:' + str(utilizator))
+        print( [utilizator])
+
         if utilizator:
             if check_password_hash(utilizator.parola, form.parola.data) and utilizator.activ == 1:
                 login_user(utilizator)
                 flash("V-ati logat cu succes")
 
                 return redirect(url_for('clienti'))
-            else:
+
+            elif not check_password_hash(utilizator.parola, form.parola.data):
+
+                flash ( "Parola introdusa nu este corecta. Incercati din nou" )
+                return redirect(url_for('logare'))
+
+            else :
+
                 flash("Contul dumneavoastra nu este activ !!! Contactati-ne pentru a verifica situatia contului.")
             return redirect(url_for('index'))
+
+        flash("Nu aveti dreptul de a folosi aceasta sectiune. Creati-va in cont pentru a pute intra !")
     return render_template("logare.html", form=form, an_curent=an_curent)
 
 @app.route('/cont_nou', methods=['GET','POST'])
@@ -52,7 +62,7 @@ def cont_nou():
             email=utilizator_nou.email
             token = s.dumps(email, salt='confirmare_email')
 
-            msg = Message('Confirmare Email', sender='cosmin@zenic.ro', recipients=[email])
+            msg = Message('Confirmare Email', sender='totoalpina@gmail.com', recipients=[email])
             link = url_for('confirmare_email', token=token, _external=True)
             msg.body = """\n    Va multumim pentru inregistrare ! Pentru a va activa contul creat pe site-ul nostru accesati linkul de mai jos. \n
         \n

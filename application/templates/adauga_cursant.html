@@ -42,11 +42,11 @@
                           <div class="card-body">
                                 {{ form.hidden_tag() }}
                                   <label>Nume</label><br>
-                                  {{ form.nume }}<br>
+                                  {{ form.nume(placeholder='nume') }}<br>
                                   <label>Prenume</label><br>
-                                  {{ form.prenume }}<br>
+                                  {{ form.prenume(placeholder='prenume') }}<br>
                                   <label>Localitate</label><br>
-                                  {{ form.localitate }}<br>
+                                  {{ form.localitate(placeholder='localitate') }}<br>
                           </div>
                     </div>
                 </div>
@@ -54,11 +54,11 @@
                     <div class="card h-100">
                           <div class="card-body">
                                   <label>Adresa</label><br>
-                                  {{ form.adresa }}<br>
+                                  {{ form.adresa(placeholder='adresa') }}<br>
                                   <label>Email</label><br>
-                                  {{ form.email }}<br>
+                                  {{ form.email(placeholder='email@email.com') }}<br>
                                   <label>Telefon</label><br>
-                                  {{ form.telefon }}<br>
+                                  {{ form.telefon(placeholder='+401234567897') }}<br>
                         </div>
                     </div>
                 </div>
@@ -68,14 +68,14 @@
                                   <label>Categorie Scolarizare</label><br>
                                   {{ form.categorie_scolarizare }}<br>
                                   <label>Observatii</label><br>
-                                  {{ form.observatii }}<br>
+                                  {{ form.observatii(placeholder='Observatii') }}<br>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
             <div id="success">
-                <button type="submit" class="btn btn-primary">Inregistrati</button>
+                <button type="submit" class="btn btn-outline-success">Inregistrati</button><a href="{{ url_for('clienti') }}" class="btn btn-outline-danger" style="float:right">Renunta</a>
             </div>
         </form>
 

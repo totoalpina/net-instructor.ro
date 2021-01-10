@@ -43,17 +43,27 @@
                                 <div class="card h-200">
                                     <div class="card-body">
                                         <label>Utilizator</label><br>
-                                        {{form.utilizator}}
+                                        {{ form.utilizator(placeholder='Utilizator') }}
                                     </div>
                                 </div>
+                                        {% if form.utilizator.errors %}
+                                        <ul class="errors">
+                                        {% for error in form.utilizator.errors %}<li>{{ error }}</li>{% endfor %}
+                                        </ul>
+                                        {% endif %}
                           </div>
                           <div class="col-lg-6 mb-6">
                                 <div class="card h-200">
                                     <div class="card-body">
                                         <label>Parola</label><br>
-                                        {{form.parola}}
+                                        {{ form.parola(placeholder='Introduceti parola') }}
                                     </div>
                                 </div>
+                                        {% if form.parola.errors %}
+                                        <ul class="errors">
+                                        {% for error in form.parola.errors %}<li>{{ error }}</li>{% endfor %}
+                                        </ul>
+                                        {% endif %}
                           </div>
                     </div>
                   <!-- For success/fail messages -->

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, PasswordField, StringField, DateTimeField, IntegerField, SelectField
-from wtforms.validators import InputRequired, Email, Length, EqualTo
-from application import db, login_manager
+from wtforms.validators import InputRequired, Email, Length
+from application import db
 from flask_login import LoginManager, UserMixin
 
 
@@ -27,7 +27,7 @@ class SignupForm(FlaskForm):
     nume = StringField('nume', validators=[InputRequired(), Length(max=40)])
     prenume = StringField('prenume', validators=[InputRequired(), Length(max=40)])
     parola = PasswordField('parola', validators=[InputRequired(), Length(min=6,max=25)])
-    confirma_parola = PasswordField('confirma_parola', validators=[InputRequired(), Length(min=6,max=25), EqualTo(parola, message='Parole nu este identica ! Incercati din nou')])
+    confirma_parola = PasswordField('confirma_parola', validators=[InputRequired(), Length(min=6,max=25)])
     email = StringField('email', validators=[Email(), InputRequired()])
 
 class CursantNouForm(FlaskForm):
