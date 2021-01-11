@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, PasswordField, StringField, DateTimeField, IntegerField, SelectField
+from wtforms import SubmitField, PasswordField, StringField, DateTimeField, IntegerField, SelectField, TextAreaField
+
 from wtforms.validators import InputRequired, Email, Length
 from application import db
 from flask_login import LoginManager, UserMixin
@@ -70,3 +71,8 @@ class Clienti(db.Model):
         self.activ = activ
         self.observatii = observatii
 
+class ContactMe(FlaskForm):
+    nume = StringField('nume', validators=[InputRequired(), Length(max=40)])
+    email = StringField ( 'email', validators = [ Email ( ), InputRequired ( ) ] )
+    telefon = StringField('telefon', validators=[InputRequired(), Length(max=25)])
+    mesaj = TextAreaField('mesaj', render_kw={"rows": 6, "cols": 52}, validators=[InputRequired(), Length(max=500)])

@@ -9,6 +9,7 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_PORT = os.environ.get('MAIL_PORT')
     MAIL_USE_TLS = True
+
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     PERMANENT_SESSION_LIFETIME = timedelta ( minutes = 20 )
     SESSION_REFRESH_EACH_REQUEST = True

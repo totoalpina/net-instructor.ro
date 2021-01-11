@@ -39,7 +39,7 @@
                         <tr>
                             <th>Nume</th>
                             <th>Prenume</th>
-                            <th>Categorie Scolarizare</th>
+                            <th>C.S.</th>
                             <th>Localitate</th>
 <!--                            <th>Adresa</th>-->
                             <th>Data inscriere</th>
@@ -47,12 +47,12 @@
                         </tr>
                     {% for form in form %}
                         <tr>
-                            <td>{{ form.nume }}</td>
-                            <td>{{ form.prenume }}</td>
+                            <td><strong>{{ form.nume }}</strong></td>
+                            <td><strong>{{ form.prenume }}</strong></td>
                             <td>{{ form.categorie_scolarizare }}</td>
                             <td>{{ form.localitate }}</td>
 <!--                            <td>{{ form.adresa }}</td>-->
-                            <td>{{ form.data_adaugare.strftime("%d %B %Y") }}</td>
+                            <td>{{ form.data_adaugare.strftime("%d %m %Y") }}</td>
                             <td>
                                 <div class="d-flex justify-content-center">
                                     <a href="/incasare/{{ form.id }}" class="btn btn-outline-primary btn-xs" style="padding: 5px; margin: 2px" >Detalii</a>

@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, flash
 from application import app, db, login_manager, mail
-from application.models import LoginForm, SignupForm, Login, Clienti, CursantNouForm
+from application.models import LoginForm, SignupForm, Login, Clienti, CursantNouForm, ContactMe
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user, login_user, logout_user
@@ -120,12 +120,16 @@ def cursant():
         return redirect(url_for('clienti'))
     return render_template("adauga_cursant.html", form=form, an_curent=an_curent)
 
+@app.route('/contact_me', methods=['GET','POST'])
+def contact_me():
+    form = ContactMe()
+    return render_template("contact.html", form=form, an_curent = datetime.now ( ))
 
 
-@app.route('/contact')
-def contact():
-    an_curent = datetime.now()
-    return render_template("contact.html", an_curent=an_curent)
+# @app.route('/contact')
+# def contact():
+#     an_curent = datetime.now()
+#     return render_template("contact.html", an_curent=an_curent)
 
 @app.route('/sterge_cursant/<int:id>')
 @login_required
