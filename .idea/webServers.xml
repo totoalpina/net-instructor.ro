@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8da50232-a18c-4780-9533-005eaa7e3ea8" name="net-instructor" url="http://net-instructor.ro">
+        <fileTransfer rootFolder="/home/cosmin" accessType="SFTP" host="192.46.232.19" port="22" sshConfigId="7b54b41d-0825-4c68-9ec3-c71ab1e1052a" sshConfig="server@net-instructor.ro" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

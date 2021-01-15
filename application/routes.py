@@ -1,14 +1,17 @@
+import os
 from flask import render_template, redirect, url_for, flash
 from application import app, db, login_manager, mail
 from application.models import LoginForm, SignupForm, Login, Clienti, CursantNouForm, ContactMe
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user, login_user, logout_user
-from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+from application.functii import validare_mail
+
 
 s = URLSafeTimedSerializer('SECRET_KEY')
+
 
 @login_manager.user_loader
 def load_user(login_id):
@@ -53,9 +56,13 @@ def cont_nou():
     form = SignupForm()
     an_curent = datetime.now()
     if form.validate_on_submit():
+        email=form.email.data
         hased_parola = generate_password_hash(form.parola.data, method='sha256' )
         utilizator_nou = Login(nume=form.nume.data, prenume=form.prenume.data, utilizator=form.utilizator.data, email=form.email.data,
                               data_adaugare=datetime.now(), data_modificare=datetime.now(), parola=hased_parola)
+
+        validare_mail(email)
+
         if form.parola.data == form.confirma_parola.data:
             db.session.add(utilizator_nou)
             db.session.commit()
@@ -91,12 +98,24 @@ def confirmare_email(token):
         return '<h1>The token is expired!</h1>'
     return redirect(url_for('logare'))
 
+@app.route('/profil_utilizator', methods=['GET','POST'])
+@login_required
+def profil_utilizator():
+    return render_template("profil_utilizator.html", an_curent=datetime.now ( ))
+
 @app.route('/clienti', methods=['GET','POST'])
 @login_required
 def clienti():
     an_curent = datetime.now()
     form = Clienti.query.order_by('id')
     return render_template("clienti.html", an_curent=an_curent, form = form)
+
+@app.route('/detalii_cursant/<int:id>', methods=['GET','POST'])
+@login_required
+def detalii_cursant(id):
+    cursant = Clienti.query.filter_by(id=id).first()
+    print(cursant)
+    return render_template('detalii_cursant.html', cursant=cursant, an_curent=datetime.now())
 
 @app.route('/adauga_cursant', methods=['GET','POST'])
 @login_required
@@ -125,11 +144,26 @@ def contact_me():
     form = ContactMe()
     return render_template("contact.html", form=form, an_curent = datetime.now ( ))
 
+@app.route('/send_mail', methods=['GET','POST'])
+def send_mail():
+    form = ContactMe ( )
+    email = form.email.data
 
-# @app.route('/contact')
-# def contact():
-#     an_curent = datetime.now()
-#     return render_template("contact.html", an_curent=an_curent)
+    validare_mail(email)
+
+    send_to = os.environ.get('MAIL_USERNAME')
+    if form.validate_on_submit ( ) :
+        try :
+            msg = Message ( 'Cineva te vrea !! Formular contact Net-Instructor.ro', sender = (email), recipients = [send_to] )
+            msg.body = '\n from : ' + form.nume.data + ' - telefon: ' + form.telefon.data + ', \n \n ' + form.mesaj.data
+
+            mail.send ( msg )
+            flash (
+                "Mesajul dvs a for trimis. Va multumim pentru increderea acordata. Veti fi contactat in cel mai scurt timp posibil." )
+            return redirect(url_for('contact_me'))
+        except:
+            flash ( "Completati toate campurile si incarcati din nou!")
+    return redirect ( url_for ( 'contact_me' ) )
 
 @app.route('/sterge_cursant/<int:id>')
 @login_required

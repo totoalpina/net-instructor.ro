@@ -1,0 +1,141 @@
+{% extends "base.html"%}
+{% block content%}
+    <!-- /.row -->
+    <div class="container">
+
+        <hr>
+        <h1 class="mt-4 mb-3">Profil
+              <small></small>
+            </h1>
+
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="{{ url_for('index')}}">Home</a>
+              </li>
+              <li class="breadcrumb-item active">Profil utilizator</li>
+            </ol>
+            <hr>
+                         {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissable d-flex justify-content-around" role="alert" style="text-align: center">
+                                        <div class="justify-content-around" style=" text-align: center">
+                                            {{message}}
+                                        </div>
+                                        <div class="justify-content-around" style="text-align: center">
+                                             <button type="button" class="close float-right" data-dismiss="alert" aria-label ="close" style="text-align: center">
+                                                 <span aria-hidden="true" class="float-right" style="text-align: center">&times;</span>
+                                             </button>
+                                        </div>
+
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+        <div class="row">
+            <div class="col-md-8">
+                <form class="row g-3">
+                    <div class="col-lg-4 mb-4">
+                        <label for="inputPassword2"><strong>Utilizator</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPassword2">totoalpina</label>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" style="color:black">modifica</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+{#                <h3>Project Two</h3>#}
+{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
+
+                </a>
+            </div>
+            <div class="col-md-8">
+                <form class="row g-3">
+                    <div class="col-lg-4 mb-4">
+                        <label for="inputPassword2"><strong>Nume</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPassword2">totoalpina</label>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" style="color:black">modifica</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+{#                <h3>Project Two</h3>#}
+{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
+
+                </a>
+            </div>
+            <div class="col-md-8">
+                <form class="row g-3">
+                    <div class="col-lg-4 mb-4">
+                        <label for="inputPassword2"><strong>Prenume</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPassword2">totoalpina</label>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" style="color:black">modifica</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+{#                <h3>Project Two</h3>#}
+{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
+
+                </a>
+            </div>
+            <div class="col-md-8">
+                <form class="row g-3">
+                    <div class="col-lg-4 mb-4">
+                        <label for="inputPassword2"><strong>Utilizator</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPassword2">totoalpina</label>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" style="color:black">modifica</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+{#                <h3>Project Two</h3>#}
+{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
+
+                </a>
+            </div>
+            <div class="col-md-8">
+                <form class="row g-3">
+                    <div class="col-lg-4 mb-4">
+                        <label for="inputPassword2"><strong>Email</strong></label>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPassword2">totoalpina</label>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" style="color:black">modifica</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+{#                <h3>Project Two</h3>#}
+{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
+
+                </a>
+            </div>
+        </div>
+
+        <hr>
+
+        <hr>
+    </div>
+
+{% endblock %}
+
+    <!-- Project Four -->

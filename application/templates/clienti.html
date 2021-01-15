@@ -29,13 +29,14 @@
                         <li class="breadcrumb-item active">Registru cursanti</li>
 
                     </ol>
+
+                    <hr>
+            <div class="row">
+                <div class="col-lg-12">
                     <div>
                             <a href="/adauga_cursant" class="btn btn-outline-dark btn-xs" style="float: left; margin-bottom: 5px">Adauga Cursant</a>
                     </div>
-                    <hr>
-
-
-                    <table class="table table-bordered table-striped table-hover">
+                    <table class="table table-responsive-sm table-bordered table-striped table-hover">
                         <tr>
                             <th>Nume</th>
                             <th>Prenume</th>
@@ -47,15 +48,16 @@
                         </tr>
                     {% for form in form %}
                         <tr>
+                            <td hidden="1">{{ form.id }}</td>
                             <td><strong>{{ form.nume }}</strong></td>
                             <td><strong>{{ form.prenume }}</strong></td>
                             <td>{{ form.categorie_scolarizare }}</td>
                             <td>{{ form.localitate }}</td>
 <!--                            <td>{{ form.adresa }}</td>-->
                             <td>{{ form.data_adaugare.strftime("%d %m %Y") }}</td>
-                            <td>
-                                <div class="d-flex justify-content-center">
-                                    <a href="/incasare/{{ form.id }}" class="btn btn-outline-primary btn-xs" style="padding: 5px; margin: 2px" >Detalii</a>
+                            <td >
+                                <div class="d-flex justify-content-left">
+                                    <a href="/detalii_cursant/{{ form.id }}" class="btn btn-outline-primary btn-xs" style="padding: 5px; margin: 2px" >Detalii</a>
                                     <a href="/sterge_cursant/{{ form.id }}" class="btn btn-outline-danger btn-xs" style="padding: 5px; margin: 2px" onclick="return confirm('Sunteti sigur(a) ca doriti stergerea datelor?')">Sterge</a>
                                 </div>
                             </td>
@@ -63,40 +65,28 @@
                     {% endfor %}
                     </table>
                     <hr style="background-color: #f59321">
-
+                </div>
+            </div>
                     <div class="row">
                             <div class="col-lg-6">
-                                    <h2>Modern Business Features</h2>
-                                        <p>The Modern Business template by Start Bootstrap includes:</p>
+                                    <h2>Net-Instructor</h2>
+                                        <p>Aplicatie de gestiune a activitatii de scolarizare a instructorilor auto:</p>
                                     <ul>
                                         <li>
-                                            <strong>Bootstrap v4</strong>
+                                            <strong>Ce va oferim :</strong>
                                         </li>
-                                        <li>jQuery</li>
-                                        <li>Font Awesome</li>
-                                        <li>Working contact form with validation</li>
-                                        <li>Unstyled page elements for easy customization</li>
+                                        <li>Mobilitate</li>
+                                        <li>Gestiune centralizata</li>
+                                        <li>Accesarea informatiilor multidevice ( Laptop, Tableta, Telefon )</li>
+                                        <li>Tehnologii in pas cu vremurile in care traim</li>
                                     </ul>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+                                    <p></p>
                             </div>
                             <div class="col-lg-6">
                                     <img class="img-fluid rounded" src="{{url_for('static', filename='img/poligon_moto.jpg')}}" alt="">
                             </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <hr>
-
-                            <!-- Call to Action Section -->
-                            <div class="row mb-4">
-                                    <div class="col-md-8">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-                                    </div>
-                            </div>
                     </div>
+
 </div>
 
 {% endblock %}

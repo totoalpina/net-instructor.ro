@@ -11,12 +11,12 @@
   <title>Net-Instructor.ro</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="static/css/bootstrap.min.css" rel="stylesheet">
-  <link href="static/css/bootstrap-grid.css" rel="stylesheet">
-  <link href="static/css/bootstrap-reboot.css" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/bootstrap-grid.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/bootstrap-reboot.css')}}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="static/css/modern-business.css" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/modern-business.css')}}" rel="stylesheet">
 
 </head>
 <body style="background-color: #c6cdd2">
@@ -27,12 +27,12 @@
   {% include "includes/footer.html" %}
 
  <!-- Bootstrap core JavaScript -->
-  <script src="static/js/jquery.min.js"></script>
-  <script src="static/js/bootstrap.bundle.min.js"></script>
-  <script src="static/js/contact_me.js"></script>
-  <script src="static/js/bootstrap.min.js"></script>
-  <script src="static/js/jqBootstrapValidation.js"></script>
-  <script src="static/js/jquery.slim.js"></script>
+  <script src="{{url_for('static', filename='/js/jquery.min.js')}}"></script>
+  <script src="{{url_for('static', filename='/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='/js/contact_me.js')}}"></script>
+  <script src="{{url_for('static', filename='/js/bootstrap.min.js')}}"></script>
+  <script src="{{url_for('static', filename='/js/jqBootstrapValidation.js')}}"></script>
+  <script src="{{url_for('static', filename='/js/jquery.slim.js')}}"></script>
 
 
 </body>
