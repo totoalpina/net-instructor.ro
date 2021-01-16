@@ -5,137 +5,110 @@
 
         <hr>
         <h1 class="mt-4 mb-3">Profil
-              <small></small>
-            </h1>
+          <small></small>
+        </h1>
 
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="{{ url_for('index')}}">Home</a>
-              </li>
-              <li class="breadcrumb-item active">Profil utilizator</li>
-            </ol>
-            <hr>
-                         {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert alert-success alert-dismissable d-flex justify-content-around" role="alert" style="text-align: center">
-                                        <div class="justify-content-around" style=" text-align: center">
-                                            {{message}}
-                                        </div>
-                                        <div class="justify-content-around" style="text-align: center">
-                                             <button type="button" class="close float-right" data-dismiss="alert" aria-label ="close" style="text-align: center">
-                                                 <span aria-hidden="true" class="float-right" style="text-align: center">&times;</span>
-                                             </button>
-                                        </div>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{{ url_for('index')}}">Home</a>
+          </li>
+          <li class="breadcrumb-item active">Profil utilizator {% if current_user.is_authenticated %} -&nbsp{{ current_user.prenume }} {% endif %}</li>
+        </ol>
+        <hr>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissable d-flex justify-content-around" role="alert" style="text-align: center">
+                                    <div class="justify-content-around" style=" text-align: center">
+                                        {{message}}
+                                    </div>
+                                    <div class="justify-content-around" style="text-align: center">
+                                         <button type="button" class="close float-right" data-dismiss="alert" aria-label ="close" style="text-align: center">
+                                             <span aria-hidden="true" class="float-right" style="text-align: center">&times;</span>
+                                         </button>
+                                    </div>
 
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+        <h5>Pentru a modifica informatiile inclocuiti valorile din campuri dupa care salvatile apasand butonul "Salveaza modificarile"</h5>
+        <hr>
+        <form action="{{ url_for('profil_utilizator') }}" method="POST">
+            <div class="row">
+                    {{ form.hidden_tag() }}
+                    <div class="col-md-8">
+                        <div class="row col-md-8">
+                            <div class="row col-lg-4 mb-4">
 
+                                <label><strong>Utilizator {{ form.id }}</strong></label>
+                            </div>
+                            <div class="row col-lg-4 mb-4">
+
+                                {{ form.utilizator(class="form-control-md") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row col-md-8">
+                            <div class="row col-lg-4 mb-4">
+                                <label><strong>Nume</strong></label>
+                            </div>
+                            <div class="row col-lg-4 mb-4">
+                                {{ form.nume(class="form-control-md") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row col-md-8">
+                            <div class="row col-lg-4 mb-4">
+                                <label><strong>Prenume</strong></label>
+                            </div>
+                            <div class="row col-lg-4 mb-4">
+                                {{ form.prenume(class="form-control-md") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row col-md-8">
+                            <div class="row col-lg-4 mb-4">
+                                <label><strong>Email</strong></label>
+                            </div>
+                            <div class="row col-lg-4 mb-4">
+                                {{ form.email(class="form-control-md") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <button type="submit" class="btn btn-outline-primary">Salveaza modificarile</button>
+                    </div>
+            </div>
+        </form>
+        <hr>
         <div class="row">
-            <div class="col-md-8">
-                <form class="row g-3">
-                    <div class="col-lg-4 mb-4">
-                        <label for="inputPassword2"><strong>Utilizator</strong></label>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="inputPassword2">totoalpina</label>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" style="color:black">modifica</a>
-                    </div>
-                </form>
+            <div class="col-lg-6">
+                    <h2>Net-Instructor</h2>
+                        <p>Aplicatie de gestiune a activitatii de scolarizare a instructorilor auto:</p>
+                    <ul>
+                        <li>
+                            <strong>Ce va oferim :</strong>
+                        </li>
+                        <li>Mobilitate</li>
+                        <li>Gestiune centralizata</li>
+                        <li>Accesarea informatiilor multidevice ( Laptop, Tableta, Telefon )</li>
+                        <li>Tehnologii in pas cu vremurile in care traim</li>
+                    </ul>
+                    <p></p>
             </div>
-            <div class="col-md-4">
-{#                <h3>Project Two</h3>#}
-{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
-
-                </a>
-            </div>
-            <div class="col-md-8">
-                <form class="row g-3">
-                    <div class="col-lg-4 mb-4">
-                        <label for="inputPassword2"><strong>Nume</strong></label>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="inputPassword2">totoalpina</label>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" style="color:black">modifica</a>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-{#                <h3>Project Two</h3>#}
-{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
-
-                </a>
-            </div>
-            <div class="col-md-8">
-                <form class="row g-3">
-                    <div class="col-lg-4 mb-4">
-                        <label for="inputPassword2"><strong>Prenume</strong></label>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="inputPassword2">totoalpina</label>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" style="color:black">modifica</a>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-{#                <h3>Project Two</h3>#}
-{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
-
-                </a>
-            </div>
-            <div class="col-md-8">
-                <form class="row g-3">
-                    <div class="col-lg-4 mb-4">
-                        <label for="inputPassword2"><strong>Utilizator</strong></label>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="inputPassword2">totoalpina</label>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" style="color:black">modifica</a>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-{#                <h3>Project Two</h3>#}
-{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
-
-                </a>
-            </div>
-            <div class="col-md-8">
-                <form class="row g-3">
-                    <div class="col-lg-4 mb-4">
-                        <label for="inputPassword2"><strong>Email</strong></label>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="inputPassword2">totoalpina</label>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" style="color:black">modifica</a>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-{#                <h3>Project Two</h3>#}
-{#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>#}
-
-                </a>
+            <div class="col-lg-6">
+                <img class="img-fluid rounded" src="{{url_for('static', filename='img/poligon_moto.jpg')}}" alt="">
             </div>
         </div>
-
-        <hr>
-
         <hr>
     </div>
 
+
+
+
 {% endblock %}
 
-    <!-- Project Four -->

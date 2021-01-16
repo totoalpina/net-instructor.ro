@@ -1,7 +1,7 @@
 import os
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from application import app, db, login_manager, mail
-from application.models import LoginForm, SignupForm, Login, Clienti, CursantNouForm, ContactMe
+from application.models import LoginForm, SignupForm, Login, Clienti, CursantNouForm, ContactMe, UpdateUser
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user, login_user, logout_user
@@ -50,6 +50,8 @@ def logare():
 
         flash("Nu aveti dreptul de a folosi aceasta sectiune. Creati-va in cont pentru a pute intra !")
     return render_template("logare.html", form=form, an_curent=an_curent)
+
+
 
 @app.route('/cont_nou', methods=['GET','POST'])
 def cont_nou():
@@ -101,7 +103,32 @@ def confirmare_email(token):
 @app.route('/profil_utilizator', methods=['GET','POST'])
 @login_required
 def profil_utilizator():
-    return render_template("profil_utilizator.html", an_curent=datetime.now ( ))
+
+    form = UpdateUser ( )
+    if form.validate_on_submit ( ) :
+        id = current_user.id
+        utilizator = form.utilizator.data
+        nume = form.nume.data
+        prenume = form.prenume.data
+        email = form.email.data
+        val_noi = Login.query.filter(Login.id == id).first()
+        val_noi.utilizator=utilizator
+        val_noi.nume=nume
+        val_noi.prenume=prenume
+        val_noi.email=email
+        val_noi.data_modificare=datetime.now()
+        db.session.flush()
+        db.session.commit ( )
+        flash('Profilul a fost modificat cu noile valori')
+    elif request.method == 'GET' :
+        form.utilizator.data = current_user.utilizator
+        form.nume.data = current_user.nume
+        form.prenume.data = current_user.prenume
+        form.email.data = current_user.email
+        id = current_user.id
+
+    return render_template("profil_utilizator.html", form=form, an_curent=datetime.now ( ))
+
 
 @app.route('/clienti', methods=['GET','POST'])
 @login_required

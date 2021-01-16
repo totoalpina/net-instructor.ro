@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, PasswordField, StringField, DateTimeField, IntegerField, SelectField, TextAreaField
 
-from wtforms.validators import InputRequired, Email, Length
+from wtforms.validators import InputRequired, Email, Length, ValidationError
 from application import db
 from flask_login import LoginManager, UserMixin
 
@@ -30,6 +30,16 @@ class SignupForm(FlaskForm):
     parola = PasswordField('parola', validators=[InputRequired(), Length(min=6,max=25)])
     confirma_parola = PasswordField('confirma_parola', validators=[InputRequired(), Length(min=6,max=25)])
     email = StringField('email', validators=[Email("Va rugam introduceti o adresa de mail valida!"), InputRequired()])
+
+    def validate_email( self, email):
+        user = Login.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('Acest email este inregistrat deja. Va rugam alegeti un alt utilizator')
+
+    def validate_utilizator( self, utilizator):
+        user = Login.query.filter_by(utilizator=utilizator.data).first()
+        if user:
+            raise ValidationError('Acest utilizator este inregistrat deja. Va rugam alegeti un alt email valid')
 
 class CursantNouForm(FlaskForm):
     nume = StringField('nume', validators=[Length(max=50)])
@@ -73,6 +83,12 @@ class Clienti(db.Model):
 
 class ContactMe(FlaskForm):
     nume = StringField('nume', validators=[InputRequired(), Length(max=50)])
-    email = StringField ( 'email', validators = [ Email (('Not a valid email address.')), InputRequired ( ) ] )
+    email = StringField ( 'email', validators = [Email (('Not a valid email address.')), InputRequired ( ) ] )
     telefon = StringField('telefon', validators=[InputRequired(), Length(max=25)])
     mesaj = TextAreaField('mesaj', render_kw={"rows": 6, "cols": 63}, validators=[InputRequired(), Length(max=500)])
+
+class UpdateUser(FlaskForm):
+    utilizator = StringField('utilizator', validators=[InputRequired(), Length(min=4, max=30)])
+    nume = StringField('nume', validators=[InputRequired(), Length(max=40)])
+    prenume = StringField('prenume', validators=[InputRequired(), Length(max=40)])
+    email = StringField('email', validators=[Email("Va rugam introduceti o adresa de mail valida!"), InputRequired()])

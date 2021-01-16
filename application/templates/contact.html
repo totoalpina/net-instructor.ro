@@ -1,102 +1,106 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <!-- Page Content -->
+
   <div class="container">
+                <h1 class="mt-4 mb-3">
+                      {% if current_user.is_anonymous %}
+                        Contact
+                      {% elif current_user.is_authenticated %}
+                        Suport
+                      {% endif %}
+                  <small></small>
+                </h1>
 
-    <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3">Contact
-              <small></small>
-            </h1>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="{{ url_for('index')}}">Home</a>
+                  </li>
+                  <li class="breadcrumb-item active">
+                      {% if current_user.is_anonymous %}
+                        Contact
+                      {% elif current_user.is_authenticated %}
+                        Suport
+                      {% endif %}
+                  </li>
+                </ol>
 
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="{{ url_for('index')}}">Home</a>
-              </li>
-              <li class="breadcrumb-item active">Contact</li>
-            </ol>
-            <hr>
-                         {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert alert-success alert-dismissable d-flex justify-content-around" role="alert" style="text-align: center">
-                                        <div class="justify-content-around" style=" text-align: center">
-                                            {{message}}
-                                        </div>
-                                        <div class="justify-content-around" style="text-align: center">
-                                             <button type="button" class="close float-right" data-dismiss="alert" aria-label ="close" style="text-align: center">
-                                                 <span aria-hidden="true" class="float-right" style="text-align: center">&times;</span>
-                                             </button>
-                                        </div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissable d-flex justify-content-around" role="alert" style="text-align: center">
+                                    <div class="justify-content-around" style=" text-align: center">
+                                        {{message}}
+                                    </div>
+                                    <div class="justify-content-around" style="text-align: center">
+                                         <button type="button" class="close float-right" data-dismiss="alert" aria-label ="close" style="text-align: center">
+                                             <span aria-hidden="true" class="float-right" style="text-align: center">&times;</span>
+                                         </button>
+                                    </div>
 
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-    <!-- Content Row -->
-        <div class="row">
-        {#      &lt;!&ndash; Map Column &ndash;&gt;#}
-                      <div class="col-lg-8 mb-4" style="height: 400px;">
-                {#        &lt;!&ndash; Embedded Google Map &ndash;&gt;#}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="row">
+
+                    <div class="col-lg-8 mb-4" style="height: 400px;">
                         <img class="img-fluid rounded" style="max-width:100%; max-height:100%" src="{{url_for('static', filename='img/poligon_moto.jpg')}}">
-                      </div>
-                {#      &lt;!&ndash; Contact Details Column &ndash;&gt;#}
-                      <div class="col-lg-4 mb-4">
+                    </div>
+                    <div class="col-lg-4 mb-4">
                         <h3>Contact Details</h3>
                         <p>
-                          Calea Dorobantilor 1
-                          <br>Cluj-Napoca, CJ 400001
-                          <br>
+                            Calea Dorobantilor 1
+                            <br>Cluj-Napoca, CJ 400001
+                            <br>
                         </p>
                         <p>
-                          Phone: (123) 456-7890
+                            Phone: (123) 456-7890
                         </p>
                         <p>
-                          Email :
-                          <a href="mailto:name@example.com">name@example.com
-                          </a>
+                            Email :
+                            <a href="mailto:name@example.com">name@example.com</a>
                         </p>
                         <p>
-                          Orar : Luni - Vineri: 9:00 - 17:00
+                            Orar : Luni - Vineri: 9:00 - 17:00
                         </p>
-                      </div>
                     </div>
-            <!-- /.row -->
 
-            <!-- Contact Form -->
-            <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+                    {% if current_user.is_anonymous %}
+                        <div class="col-lg-8 mb-4">
+                            <h4>Contactati-ne !!</h4><br>
+                            <h6>In caz ca sunteti interesat de serviciile noastre, lasati un mesaj si va vom contacta in cel mai scurt timp!</h6>
+                        </div>
+                    {% elif current_user.is_authenticated %}
+                        <div class="col-lg-8 mb-4">
+                            <h4>Raportati probleme !!</h4><br>
+                            <h6>In cazul descoperirii de disfunctionalitati, folositi formularul de mai jos pentru a ne raporta problemele aparute!</h6>
+                        </div>
+                    {% endif %}
+                    <hr>
+                    <div class="col-lg-8 mb-4">
+                        <form action="{{ url_for('send_mail') }}" method="POST">
+                            <div>
+                            {{ form.hidden_tag() }}
+                                <label>Nume si prenume: </label><br>
+                                {{ form.nume(size='60') }}<br>
+                                <label>Telefon :</label><br>
+                                {{ form.telefon(placeholder='000 000 000', size='60') }}<br>
+                                <label>Email :</label><br>
+                                {{ form.email(placeholder='email@email.com', size='60') }}<br>
 
-
-
-                        <h4>Contactati-ne !!</h4>
-                        <h6>In caz ca sunteti interesat de serviciile noastre, lasati un mesaj si va vom contacta in cel mai scurt timp!</h6>
-                          <form action="{{ url_for('send_mail') }}" method="POST">
-
-
-                                          <div>
-                                                {{ form.hidden_tag() }}
-                                                  <label>Nume si prenume: </label><br>
-                                                  {{ form.nume(size='60') }}<br>
-                                                  <label>Telefon :</label><br>
-                                                  {{ form.telefon(placeholder='000 000 000', size='60') }}<br>
-                                                  <label>Email :</label><br>
-                                                  {{ form.email(placeholder='email@email.com', size='60') }}<br>
-
-                                          </div>
-
-
-
-                                        <div>
-                                              <label>Mesajul dvs.</label><br>
-                                              {{ form.mesaj(placeholder='Max. 500 caractere') }}
-
-                                        </div>
-                                        <div>
-                                            <button type="submit" class="btn btn-primary">Trimiteti</button>
-                                        </div>
-
-                          </form>
-        </div>
+                            </div>
+                            <div>
+                                <label>Mesajul dvs.</label><br>
+                                {{ form.mesaj(placeholder='Max. 500 caractere') }}
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Trimiteti</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
     <!-- /.row -->
   </div>
   <!-- /.container -->
