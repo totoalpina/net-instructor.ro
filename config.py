@@ -3,10 +3,10 @@ import os
 from datetime import timedelta
 
 class Config(object):
-    SECRET_KEY = "maricicabiciclista"
-    MAIL_SERVER = "mail.zenic.ro"
-    MAIL_USERNAME = "cosmin@zenic.ro"
-    MAIL_PASSWORD = "0bR_oaXi;fe!"
+    SECRET_KEY = 
+    MAIL_SERVER = 
+    MAIL_USERNAME = 
+    MAIL_PASSWORD = 
     MAIL_PORT = "587"
 
     # SECRET_KEY = os.environ.get('SECRET_KEY')
